@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MagicTShirt • Roupas, Camisetas e Moletons</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- ANNOUNCE -->
+  <div class="announce">
+    <span>✨ Frete grátis acima de R$199 • Troca fácil em 30 dias • Atendimento: (11) 4000-0000</span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container header-row">
+      <button class="icon-btn only-mobile" id="btnOpenMenu" aria-label="Abrir menu" aria-expanded="false" aria-controls="drawer">☰</button>
+      <a href="index.html" class="logo">Magic<span>TShirt</span></a>
+
+      <nav class="nav" role="navigation" aria-label="Menu principal">
+        <ul class="nav-list">
+          <li><a href="novidades.html">Lançamentos</a></li>
+          <li><a href="#colecoes">Coleções</a></li>
+          <li><a href="camisetas.html">Camisetas</a></li>
+          <li><a href="moletons.html">Moletons</a></li>
+          <li><a href="#blog">Blog</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="search">
+          <input type="search" id="searchInput" placeholder="Buscar produtos (ex: camiseta preta)" aria-label="Buscar produtos" />
+          <button class="icon-btn" id="btnSearch" aria-label="Buscar">🔎</button>
+        </div>
+
+        <div id="userArea" class="user-area">
+          <button id="btnLogin" class="btn btn-ghost">Entrar</button>
+        </div>
+
+        <button class="icon-btn" id="btnCart" aria-label="Abrir carrinho" aria-controls="cartModal" aria-expanded="false">
+          🛒 <span class="cart-badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Drawer (mobile) -->
+  <aside class="drawer" id="drawer" aria-hidden="true" role="menu" aria-label="Menu mobile">
+    <div class="drawer-header">
+      <span class="drawer-title">Menu</span>
+      <button class="icon-btn" id="btnCloseMenu" aria-label="Fechar menu">✕</button>
+    </div>
+    <nav class="drawer-nav" aria-label="Menu mobile links">
+      <a href="novidades.html" class="drawer-link">Lançamentos</a>
+      <a href="#colecoes" class="drawer-link">Coleções</a>
+      <a href="camisetas.html" class="drawer-link">Camisetas</a>
+      <a href="moletons.html" class="drawer-link">Moletons</a>
+      <a href="#contato" class="drawer-link">Contato</a>
+    </nav>
+  </aside>
+  <div class="scrim drawer-scrim" id="scrim" aria-hidden="true"></div>
+
+  <!-- HERO ROTATOR (SVG embutido para garantir exibição) -->
+  <section class="hero-rotator">
+    <div class="hero-slide" data-index="0"
+         style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%271600%27 height=%27900%27 viewBox=%270 0 1600 900%27><defs><linearGradient id=%27g1%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%237c5cff%27/><stop offset=%271%27 stop-color=%27%2315c2c2%27/></linearGradient></defs><rect width=%271600%27 height=%27900%27 fill=%27url(%23g1)%27/><text x=%27800%27 y=%27470%27 font-family=%27Inter,Arial%27 font-size=%2742%27 font-weight=%27800%27 fill=%27%230a0c10%27 text-anchor=%27middle%27>Urban Drop — Nova coleção</text></svg>');">
+      <div class="container hero-rotator-inner">
+        <div class="hero-text">
+          <h1>Nova coleção <span class="glow">Urban Drop</span></h1>
+          <p class="lead">Peças limitadas — design autoral e tecido premium.</p>
+          <div class="hero-actions">
+            <a href="camisetas.html" class="btn btn-primary">Ver coleção</a>
+            <a href="novidades.html" class="btn btn-ghost">Lançamentos</a>
+          </div>
+        </div>
+        <div class="hero-badge">Frete grátis acima de R$199</div>
+      </div>
+    </div>
+
+    <div class="hero-slide" data-index="1"
+         style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%271600%27 height=%27900%27 viewBox=%270 0 1600 900%27><defs><linearGradient id=%27g2%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%232a2a2a%27/><stop offset=%271%27 stop-color=%27%238e7fff%27/></linearGradient></defs><rect width=%271600%27 height=%27900%27 fill=%27url(%23g2)%27/><text x=%27800%27 y=%27470%27 font-family=%27Inter,Arial%27 font-size=%2742%27 font-weight=%27800%27 fill=%27%23fff%27 text-anchor=%27middle%27>Moletom Comfort — Edição Outono</text></svg>');">
+      <div class="container hero-rotator-inner">
+        <div class="hero-text">
+          <h1>Moletom <span class="glow">Comfort</span></h1>
+          <p class="lead">Forro macio e fit moderno — edição outono.</p>
+          <div class="hero-actions">
+            <a href="novidades.html" class="btn btn-primary">Compre agora</a>
+          </div>
+        </div>
+        <div class="hero-badge">Troca grátis em 30 dias</div>
+      </div>
+    </div>
+
+    <div class="hero-controls">
+      <button id="heroPrev" class="icon-btn" aria-label="Anterior">◀</button>
+      <div id="heroDots" class="hero-dots" role="tablist"></div>
+      <button id="heroNext" class="icon-btn" aria-label="Próximo">▶</button>
+    </div>
+  </section>
+
+  <!-- CATEGORIES (backgrounds SVG embutidos) -->
+  <section id="categorias" class="container section categories">
+    <div class="section-head">
+      <h2 class="section-title">Explore por categoria</h2>
+      <p class="section-sub">Encontre o que combina com seu estilo</p>
+    </div>
+
+    <div class="categories-grid">
+      <a class="category-card" href="novidades.html" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27900%27 height=%27600%27 viewBox=%270 0 900 600%27><defs><linearGradient id=%27cg1%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%23111111%27/><stop offset=%271%27 stop-color=%27%23333333%27/></linearGradient></defs><rect width=%27900%27 height=%27600%27 fill=%27url(%23cg1)%27/><text x=%27450%27 y=%27320%27 font-family=%27Inter,Arial%27 font-size=%2732%27 fill=%27%23fff%27 text-anchor=%27middle%27>Novidades</text></svg>');">
+        <div class="category-overlay">
+          <h3>Novidades</h3>
+          <p>Peças frescas todo mês</p>
+        </div>
+      </a>
+
+      <a class="category-card" href="moletons.html" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27900%27 height=%27600%27 viewBox=%270 0 900 600%27><defs><linearGradient id=%27cg2%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%231b1b1b%27/><stop offset=%271%27 stop-color=%27%237c5cff%27/></linearGradient></defs><rect width=%27900%27 height=%27600%27 fill=%27url(%23cg2)%27/><text x=%27450%27 y=%27320%27 font-family=%27Inter,Arial%27 font-size=%2732%27 fill=%27%23fff%27 text-anchor=%27middle%27>Moletom</text></svg>');">
+        <div class="category-overlay">
+          <h3>Moletom</h3>
+          <p>Conforto & estilo</p>
+        </div>
+      </a>
+
+      <a class="category-card" href="camisetas.html" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27900%27 height=%27600%27 viewBox=%270 0 900 600%27><defs><linearGradient id=%27cg3%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%23222222%27/><stop offset=%271%27 stop-color=%27%2315c2c2%27/></linearGradient></defs><rect width=%27900%27 height=%27600%27 fill=%27url(%23cg3)%27/><text x=%27450%27 y=%27320%27 font-family=%27Inter,Arial%27 font-size=%2732%27 fill=%27%23fff%27 text-anchor=%27middle%27>Camisetas</text></svg>');">
+        <div class="category-overlay">
+          <h3>Camisetas</h3>
+          <p>Estampas exclusivas</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FEATURED (produtos com SVGs embutidos como imagens) -->
+  <section class="container section featured">
+    <div class="section-head">
+      <h2 class="section-title">Destaques</h2>
+      <div class="filters">
+        <label>Ordenar:
+          <select id="sortSelect">
+            <option value="popular">Mais populares</option>
+            <option value="new">Mais novos</option>
+            <option value="price-asc">Preço ↑</option>
+            <option value="price-desc">Preço ↓</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="product-grid" id="featuredGrid">
+      <article class="card product-card" data-id="p-10" data-name="Camiseta Retro" data-price="6999">
+        <div class="card-media">
+          <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27800%27 viewBox=%270 0 800 800%27><defs><linearGradient id=%27pg1%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%237c5cff%27/><stop offset=%271%27 stop-color=%27%23ffd166%27/></linearGradient></defs><rect width=%27800%27 height=%27800%27 fill=%27url(%23pg1)%27/><text x=%27400%27 y=%27430%27 font-family=%27Inter,Arial%27 font-size=%2732%27 font-weight=%27800%27 fill=%27%230a0c10%27 text-anchor=%27middle%27>Camiseta Retro</text></svg>" alt="Camiseta Retro">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Camiseta Retro</h3>
+          <p class="card-sub muted">Estampa exclusiva</p>
+          <div class="price">R$ 69,99</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
+            <a class="btn btn-ghost" href="#">Detalhes</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card product-card" data-id="p-11" data-name="Moletom Oversize" data-price="12990">
+        <div class="card-media">
+          <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27800%27 viewBox=%270 0 800 800%27><defs><linearGradient id=%27pg2%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%23151a24%27/><stop offset=%271%27 stop-color=%27%237c5cff%27/></linearGradient></defs><rect width=%27800%27 height=%27800%27 fill=%27url(%23pg2)%27/><text x=%27400%27 y=%27430%27 font-family=%27Inter,Arial%27 font-size=%2732%27 font-weight=%27800%27 fill=%27%23fff%27 text-anchor=%27middle%27>Moletom Oversize</text></svg>" alt="Moletom Oversize">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Moletom Oversize</h3>
+          <p class="card-sub muted">Forro aconchegante</p>
+          <div class="price">R$ 129,90</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
+            <a class="btn btn-ghost" href="#">Detalhes</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card product-card" data-id="p-12" data-name="Camiseta Eco" data-price="5999">
+        <div class="card-media">
+          <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27800%27 viewBox=%270 0 800 800%27><defs><linearGradient id=%27pg3%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%2318a77b%27/><stop offset=%271%27 stop-color=%27%23a8e6cf%27/></linearGradient></defs><rect width=%27800%27 height=%27800%27 fill=%27url(%23pg3)%27/><text x=%27400%27 y=%27430%27 font-family=%27Inter,Arial%27 font-size=%2732%27 font-weight=%27800%27 fill=%27%230a0c10%27 text-anchor=%27middle%27>Camiseta Eco</text></svg>" alt="Camiseta Eco">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Camiseta Eco</h3>
+          <p class="card-sub muted">Algodão orgânico</p>
+          <div class="price">R$ 59,99</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
+            <a class="btn btn-ghost" href="#">Detalhes</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card product-card" data-id="p-13" data-name="Boné Classic" data-price="3999">
+        <div class="card-media">
+          <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27800%27 viewBox=%270 0 800 800%27><defs><linearGradient id=%27pg4%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%231f2937%27/><stop offset=%271%27 stop-color=%27%239aa0aa%27/></linearGradient></defs><rect width=%27800%27 height=%27800%27 fill=%27url(%23pg4)%27/><text x=%27400%27 y=%27430%27 font-family=%27Inter,Arial%27 font-size=%2732%27 font-weight=%27800%27 fill=%27%23fff%27 text-anchor=%27middle%27>Boné Classic</text></svg>" alt="Boné Classic">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Boné Classic</h3>
+          <p class="card-sub muted">Ajuste perfeito</p>
+          <div class="price">R$ 39,99</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
+            <a class="btn btn-ghost" href="#">Detalhes</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SIZE GUIDE -->
+  <section id="size" class="container section size-guide">
+    <div class="section-head">
+      <h2 class="section-title">Guia de tamanhos</h2>
+      <p class="section-sub">Medidas em centímetros — use como referência antes de comprar</p>
+    </div>
+
+    <div class="size-grid">
+      <div class="size-table-wrap">
+        <table class="size-table" aria-label="Guia de tamanhos completo">
+          <thead>
+            <tr><th>Tamanho</th><th>Peito (cm)</th><th>Comprimento (cm)</th><th>Observação</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>XS</td><td>84–88</td><td>64</td><td>Ajuste justo</td></tr>
+            <tr><td>S</td><td>89–96</td><td>66</td><td>Corte padrão</td></tr>
+            <tr><td>M</td><td>97–102</td><td>68</td><td>Corte regular</td></tr>
+            <tr><td>L</td><td>103–108</td><td>70</td><td>Leve folga</td></tr>
+            <tr><td>XL</td><td>109–116</td><td>72</td><td>Oversize suave</td></tr>
+            <tr><td>XXL</td><td>117–124</td><td>74</td><td>Mais folga</td></tr>
+          </tbody>
+        </table>
+
+        <div class="size-notes">
+          <h4>Como medir</h4>
+          <ol>
+            <li><strong>Peito:</strong> meça a circunferência na parte mais larga do peito com o braço relaxado.</li>
+            <li><strong>Comprimento:</strong> meça do ponto mais alto do ombro até a barra da peça.</li>
+            <li>Prefere mais folga? Suba um tamanho. Dúvidas — consulte a descrição do produto.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG TEASER (SVGs como thumbnails) -->
+  <section id="blog" class="container section blog-teaser">
+    <div class="section-head">
+      <h2 class="section-title">Do nosso blog</h2>
+      <p class="section-sub">Inspiração, looks e cuidados com as peças</p>
+    </div>
+
+    <div class="blog-grid">
+      <article class="blog-card">
+        <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27900%27 height=%27600%27 viewBox=%270 0 900 600%27><rect width=%27900%27 height=%27600%27 fill=%27%2315181a%27/><text x=%27450%27 y=%27320%27 font-family=%27Inter,Arial%27 font-size=%2720%27 fill=%27%23fff%27 text-anchor=%27middle%27>Como cuidar do seu moletom</text></svg>" alt="Como cuidar do seu moletom">
+        <div class="blog-body">
+          <h4>Como cuidar do seu moletom</h4>
+          <p>Guia rápido para manter cor e toque macio por mais tempo.</p>
+          <a href="#" class="muted small">Ler artigo →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27900%27 height=%27600%27 viewBox=%270 0 900 600%27><rect width=%27900%27 height=%27600%27 fill=%27%231f1f2b%27/><text x=%27450%27 y=%27320%27 font-family=%27Inter,Arial%27 font-size=%2720%27 fill=%27%23fff%27 text-anchor=%27middle%27>História do streetwear</text></svg>" alt="História do streetwear">
+        <div class="blog-body">
+          <h4>História do streetwear</h4>
+          <p>Como o movimento urbano virou tendência global.</p>
+          <a href="#" class="muted small">Ler artigo →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27900%27 height=%27600%27 viewBox=%270 0 900 600%27><rect width=%27900%27 height=%27600%27 fill=%27%232a2a2a%27/><text x=%27450%27 y=%27320%27 font-family=%27Inter,Arial%27 font-size=%2720%27 fill=%27%23fff%27 text-anchor=%27middle%27>Mix & match</text></svg>" alt="Mix & match">
+        <div class="blog-body">
+          <h4>Mix & match</h4>
+          <p>Combinações fáceis para elevar o look do dia a dia.</p>
+          <a href="#" class="muted small">Ler artigo →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM-LIKE GRID (SVG placeholders) -->
+  <section class="container section insta-feed">
+    <div class="section-head">
+      <h2 class="section-title">#MagicLooks</h2>
+      <p class="section-sub">Veja como a galera usa nossas peças</p>
+    </div>
+    <div class="insta-grid">
+      <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27400%27><rect width=%27400%27 height=%27400%27 fill=%27%231a1a1a%27/><text x=%27200%27 y=%27210%27 font-family=%27Inter,Arial%27 font-size=%2720%27 fill=%27%23fff%27 text-anchor=%27middle%27>Look 1</text></svg>" alt="insta1">
+      <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27400%27><rect width=%27400%27 height=%27400%27 fill=%27%232b2b2b%27/><text x=%27200%27 y=%27210%27 font-family=%27Inter,Arial%27 font-size=%2720%27 fill=%27%23fff%27 text-anchor=%27middle%27>Look 2</text></svg>" alt="insta2">
+      <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27400%27><rect width=%27400%27 height=%27400%27 fill=%27%23383838%27/><text x=%27200%27 y=%27210%27 font-family=%27Inter,Arial%27 font-size=%2720%27 fill=%27%23fff%27 text-anchor=%27middle%27>Look 3</text></svg>" alt="insta3">
+      <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27400%27><rect width=%27400%27 height=%27400%27 fill=%27%23505050%27/><text x=%27200%27 y=%27210%27 font-family=%27Inter,Arial%27 font-size=%2720%27 fill=%27%23fff%27 text-anchor=%27middle%27>Look 4</text></svg>" alt="insta4">
+      <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27400%27><rect width=%27400%27 height=%27400%27 fill=%27%23606060%27/><text x=%27200%27 y=%27210%27 font-family=%27Inter,Arial%27 font-size=%2720%27 fill=%27%23fff%27 text-anchor=%27middle%27>Look 5</text></svg>" alt="insta5">
+      <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27400%27><rect width=%27400%27 height=%27400%27 fill=%27%23707070%27/><text x=%27200%27 y=%27210%27 font-family=%27Inter,Arial%27 font-size=%2720%27 fill=%27%23fff%27 text-anchor=%27middle%27>Look 6</text></svg>" alt="insta6">
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust container">
+    <div class="trust-grid">
+      <div class="trust-item"><strong>Pagamento seguro</strong><p>Cartão, Pix e boleto — checkout cifrado.</p></div>
+      <div class="trust-item"><strong>Entrega ágil</strong><p>Entregamos em todo o Brasil com rastreio.</p></div>
+      <div class="trust-item"><strong>Suporte</strong><p>Chat & e-mail — resposta rápida.</p></div>
+      <div class="trust-item"><strong>Garantia</strong><p>7 dias para arrependimento + troca em 30 dias.</p></div>
+    </div>
+  </section>
+
+  <!-- CART MODAL (ATUALIZADO - visual profissional) -->
+  <div id="cartModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="cartModalBackdrop"></div>
+
+    <div class="modal-box modal-lg" role="document" aria-labelledby="cartTitle" tabindex="-1">
+      <button class="modal-close icon-btn" id="btnCloseCart" aria-label="Fechar">✕</button>
+
+      <div class="cart-modal-grid">
+        <!-- LEFT: lista de itens -->
+        <div class="cart-list-wrap">
+          <header class="cart-header">
+            <h2 id="cartTitle">Seu carrinho</h2>
+            <p class="muted cart-subtle">Itens reservados por pouco tempo</p>
+          </header>
+
+          <div id="cartList" class="cart-list" aria-live="polite">
+            <!-- itens são renderizados aqui pelo JS -->
+          </div>
+
+          <div class="cart-actions-row">
+            <button id="btnContinueShopping" class="btn btn-ghost">Continuar comprando</button>
+            <button id="btnClearCart" class="btn small">Limpar carrinho</button>
+          </div>
+        </div>
+
+        <!-- RIGHT: resumo / checkout -->
+        <aside class="cart-summary">
+          <div class="summary-card">
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <strong id="cartSubtotal">R$ 0,00</strong>
+            </div>
+
+            <div class="summary-row small muted">
+              <span>Estimativa de frete</span>
+              <span>Calculada no checkout</span>
+            </div>
+
+            <div class="summary-divider" aria-hidden="true"></div>
+
+            <div class="summary-row total">
+              <span>Total</span>
+              <strong id="cartTotal">R$ 0,00</strong>
+            </div>
+
+            <div style="margin-top:12px;">
+              <button id="btnCheckout" class="btn btn-primary btn-full">Finalizar compra</button>
+              <button id="btnCheckoutLater" class="btn btn-ghost btn-full" style="margin-top:8px;">Guardar para depois</button>
+            </div>
+
+            <div class="promo" style="margin-top:12px;">
+              <label class="field-label small muted">Tem cupom?</label>
+              <div style="display:flex;gap:8px;margin-top:6px">
+                <input id="promoCode" class="field-input" placeholder="Código promocional" />
+                <button id="applyPromo" class="btn small">Aplicar</button>
+              </div>
+              <p id="promoMsg" class="muted small" style="margin-top:8px;display:none"></p>
+            </div>
+          </div>
+
+          <div class="trust-mini muted" style="margin-top:12px;font-size:13px">
+            <div>💳 Pagamento seguro • 🚚 Entrega com rastreio • 🔁 Troca em 30 dias</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="loginBackdrop"></div>
+    <div class="modal-box" role="document" aria-labelledby="loginTitle" tabindex="-1">
+      <button class="modal-close icon-btn" id="btnCloseLogin" aria-label="Fechar">✕</button>
+      <h2 id="loginTitle">Entrar na sua conta</h2>
+      <form id="loginForm" class="auth-form" autocomplete="on">
+        <label class="field"><span class="field-label">E-mail</span><input class="field-input" type="email" id="loginEmail" required placeholder="seu@exemplo.com" autocapitalize="off" /></label>
+        <label class="field"><span class="field-label">Senha</span><div class="field-with-icon"><input class="field-input" type="password" id="loginPassword" required placeholder="••••••••" /><button type="button" class="pass-toggle" data-target="loginPassword" aria-label="Mostrar senha">👁️</button></div></label>
+        <div class="auth-row"><label class="checkbox"><input type="checkbox" id="rememberMe" /> Lembrar-me</label><a href="#" class="muted small">Esqueci a senha</a></div>
+        <div class="auth-actions"><button type="submit" class="btn btn-primary btn-full">Entrar</button><button type="button" id="openSignupFromLogin" class="btn btn-ghost btn-full">Ainda não tem conta?</button></div>
+      </form>
+      <div class="auth-divider"><span>ou</span></div>
+      <div class="social-login"><button class="btn btn-ghost btn-full">Entrar com Google</button><button class="btn btn-ghost btn-full">Entrar com Apple</button></div>
+    </div>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div id="signupModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="signupBackdrop"></div>
+    <div class="modal-box" role="document" aria-labelledby="signupTitle" tabindex="-1">
+      <button class="modal-close icon-btn" id="btnCloseSignup" aria-label="Fechar">✕</button>
+      <h2 id="signupTitle">Criar conta</h2>
+      <form id="signupForm" class="auth-form" autocomplete="on">
+        <label class="field"><span class="field-label">Nome</span><input class="field-input" type="text" id="signupName" required placeholder="Seu nome" /></label>
+        <label class="field"><span class="field-label">E-mail</span><input class="field-input" type="email" id="signupEmail" required placeholder="seu@exemplo.com" /></label>
+        <label class="field"><span class="field-label">Telefone</span><input class="field-input" type="tel" id="signupPhone" required placeholder="(11) 9xxxx-xxxx" /></label>
+        <label class="field"><span class="field-label">Senha</span><div class="field-with-icon"><input class="field-input" type="password" id="signupPassword" required placeholder="Mínimo 6 caracteres" /><button type="button" class="pass-toggle" data-target="signupPassword" aria-label="Mostrar senha">👁️</button></div></label>
+        <div class="auth-actions"><button type="submit" class="btn btn-primary btn-full">Criar conta</button><button type="button" id="openLoginFromSignup" class="btn btn-ghost btn-full">Já tenho conta</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FAB -->
+  <button id="fabViewCart" class="fab" aria-hidden="true" title="Ver carrinho">Ver carrinho</button>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div class="container nl-row">
+      <div><h3>Ganhe 10% OFF no primeiro pedido</h3><p>Receba novidades, drops e cupons antes de todo mundo.</p></div>
+      <div class="nl-form">
+        <input placeholder="seu@email.com" />
+        <button class="btn btn-primary">Inscrever</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><a class="logo footer-logo" href="index.html">Magic<span>TShirt</span></a><p>Qualidade premium, produção responsável e atendimento de outro mundo.</p><div class="payments"><span>💳 Visa</span> <span>💳 MasterCard</span> <span>⚡ Pix</span> <span>🧾 Boleto</span></div></div>
+      <nav class="footer-nav"><a href="#sobre">Sobre nós</a><a href="#colecoes">Coleções</a><a href="#size">Guia de tamanhos</a><a href="#faq">FAQ</a><a href="#">Política de Troca</a></nav>
+      <div class="footer-right"><p>© <span id="year"></span> MagicTShirt. Todos os direitos reservados.</p><p class="muted">Suporte: suporte@magictshirt.com • CNPJ: 00.000.000/0001-00</p></div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+  <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
+  <script type="module" src="frontend-products.js"></script>
+  <!-- ---------- frontend dynamic calls (cole no final do <body>) ---------- -->
+<script type="module">
+  // ajuste o caminho se necessário: '/js/frontend-products.js' ou './js/frontend-products.js'
+  import { renderHero, loadProductsInto } from '/js/frontend-products.js';
+
+  // aguarda DOM pronto (opcional, mas seguro)
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1) Hero (substitui o conteúdo da .hero-rotator pelo carrossel dinâmico)
+    // certifique-se de ter no HTML: <section class="hero-rotator"></section>
+    renderHero('.hero-rotator', { limit: 4 });
+
+    // 2) Seções / grids (certifique-se que os elementos existam com esses IDs)
+    // #featuredGrid - área de destaques da sua home
+    loadProductsInto('featuredGrid', 'camisetas', { field: 'category' });
+
+    // #grid-novidades - seção de novidades (pode usar placement ou category)
+    loadProductsInto('grid-novidades', 'novidades', { field: 'placement' });
+
+    // #grid-moletons - página / seção de moletons
+    loadProductsInto('grid-moletons', 'moletons', { field: 'category' });
+  });
+</script>
+<!-- --------------------------------------------------------------------- -->
+
+<script type="module">
+  // importa do root (frontend-products.js está no mesmo nível do index.html)
+  import './frontend-products.js';
+
+</script>
+
+</body>
+</html>

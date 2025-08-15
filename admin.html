@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Painel Admin • MagicTShirt</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700,800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-1: #0f1724; /* deep */
+      --bg-2: #0b1220; /* darker */
+      --card:#0f1728;
+      --glass: rgba(255,255,255,0.03);
+      --muted:#9aa3b2;
+      --brand:#7c5cff;
+      --accent:#15c2c2;
+      --success:#10b981;
+      --danger:#ef4444;
+      --radius:16px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:#e6eef6;
+      background: radial-gradient(600px 300px at 10% 10%, rgba(124,92,255,.08), transparent 30%),
+                  linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.45;
+      padding:28px;
+    }
+
+    .app{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:360px 1fr;gap:18px}
+    @media (max-width:980px){ .app{grid-template-columns:1fr;padding:12px} }
+
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.03);padding:18px;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.6)}
+
+    header h1{margin:0;font-size:20px}
+    header p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+    /* SIDEBAR */
+    .sidebar{display:flex;flex-direction:column;gap:12px}
+    .who{display:flex;flex-direction:column;gap:6px}
+    .who .identity{display:flex;align-items:center;gap:10px}
+    .avatar{width:44px;height:44px;border-radius:10px;background:linear-gradient(90deg,var(--brand),var(--accent));display:grid;place-items:center;font-weight:800;color:#07070a}
+    .signin{display:flex;flex-direction:column;gap:8px}
+    .signin input{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit}
+    .signin .controls{display:flex;gap:8px}
+    .btn{background:linear-gradient(90deg,var(--brand),var(--accent));color:#07070a;padding:10px 12px;border-radius:10px;border:0;font-weight:800;cursor:pointer}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.03);padding:10px;border-radius:10px;color:var(--muted);cursor:pointer}
+
+    /* MAIN */
+    .main{display:flex;flex-direction:column;gap:12px}
+    .form-grid{display:grid;grid-template-columns:1fr 420px;gap:12px}
+    @media (max-width:980px){ .form-grid{grid-template-columns:1fr} }
+
+    label{display:block;margin-top:8px;font-weight:700;color:var(--muted);font-size:13px}
+    input[type="text"], input[type="number"], select, textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit}
+    textarea{min-height:110px}
+
+    .preview{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:10px;height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px dashed rgba(255,255,255,0.03)}
+    .preview img{width:100%;height:100%;object-fit:cover}
+
+    .meta{display:flex;gap:8px;align-items:center;margin-top:8px}
+    .tag{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:999px;color:var(--muted);font-weight:700}
+
+    .products-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
+    .prod-card{background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:8px}
+    .prod-thumb{height:130px;border-radius:8px;overflow:hidden;background:#071022;display:flex;align-items:center;justify-content:center}
+    .prod-thumb img{width:100%;height:100%;object-fit:cover}
+    .prod-actions{display:flex;gap:6px;margin-top:auto}
+
+    .status{margin-top:10px;padding:10px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--muted);display:none}
+
+    .help{font-size:13px;color:var(--muted)}
+
+    .footer-small{font-size:12px;color:var(--muted);text-align:right}
+
+    /* nice buttons */
+    .btn-small{padding:8px 10px;border-radius:8px;border:0;background:rgba(255,255,255,0.03);color:var(--muted);cursor:pointer}
+
+    .featured-badge{background:linear-gradient(90deg,var(--accent),var(--brand));color:#071017;padding:6px 8px;border-radius:6px;font-weight:800;margin-left:8px}
+
+  </style>
+</head>
+<body>
+  <div class="app">
+
+    <!-- SIDEBAR / AUTH -->
+    <aside class="panel sidebar">
+      <div class="who">
+        <div class="identity"><div class="avatar">MT</div><div>
+          <div style="font-weight:800">MagicTShirt Admin</div>
+          <div class="help" id="who">Não autenticado</div>
+        </div></div>
+        <p class="help">Painel para cadastro rápido. Use autenticação Firebase (Email/Password).</p>
+      </div>
+
+      <div class="signin">
+        <input id="adminEmail" placeholder="admin@exemplo.com" autocomplete="username">
+        <input id="adminPass" type="password" placeholder="senha" autocomplete="current-password">
+        <div class="controls">
+          <button id="btnSignIn" class="btn-small">Entrar</button>
+          <button id="btnSignOut" class="btn-small" style="display:none">Sair</button>
+          <button id="btnCreate" class="btn-small" title="Criar conta (dev)">Criar</button>
+        </div>
+        <div class="help">Usuário criado só para dev — remova em produção.</div>
+      </div>
+
+      <div style="margin-top:12px">
+        <div style="display:flex;gap:8px">
+          <button id="btnNew" class="btn">Novo produto</button>
+          <button id="btnCopyAll" class="btn-small">Exportar JSON</button>
+        </div>
+
+        <!-- Novos botões para gerar HTML por categoria e página inicial -->
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <button id="btnGenNovidades" class="btn-small" title="Gerar HTML da seção Novidades">Gerar HTML • Novidades</button>
+          <button id="btnGenCamisetas" class="btn-small" title="Gerar HTML da página Camisetas">Gerar HTML • Camisetas</button>
+          <button id="btnGenMoletons" class="btn-small" title="Gerar HTML da página Moletons">Gerar HTML • Moletons</button>
+          <button id="btnGenHome" class="btn-small" title="Gerar HTML da página inicial (destaques/hero)">Gerar HTML • Página Inicial (Destaques)</button>
+        </div>
+
+        <div class="status" id="status">status</div>
+      </div>
+
+      <div style="margin-top:auto;">
+        <div class="help">Dica: marque <strong>Destaque</strong> para aparecer em áreas premium do site.</div>
+        <div class="footer-small">© MagicTShirt</div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="panel">
+        <header>
+          <h1 id="formTitle">Criar / Editar produto</h1>
+          <p>Organizado, visual e com geração de snippet HTML para colar nas páginas estáticas (se necessário).</p>
+        </header>
+
+        <div class="form-grid">
+          <div>
+            <label>Nome do produto *</label>
+            <input id="prodName" placeholder="Ex: Camiseta Galaxy">
+
+            <label>Preço (R$) *</label>
+            <input id="prodPrice" placeholder="79.99">
+
+            <label>Categoria</label>
+            <select id="prodCategory">
+              <option value="novidades">Novidades</option>
+              <option value="camisetas">Camisetas</option>
+              <option value="moletons">Moletons</option>
+            </select>
+
+            <label>Local de exibição (placement)</label>
+            <select id="prodPlacement">
+              <option value="novidades">Novidades (seção)</option>
+              <option value="camisetas">Página Camisetas</option>
+              <option value="moletons">Página Moletons</option>
+              <option value="hero">Hero / Lançamento no topo</option>
+            </select>
+
+            <label style="margin-top:8px"><input id="prodFeatured" type="checkbox"> <span style="font-weight:700">Destaque</span></label>
+
+            <label style="margin-top:10px">Descrição</label>
+            <textarea id="prodDesc" placeholder="Descrição curta para o produto"></textarea>
+
+            <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
+              <button id="btnUpload" class="btn">Salvar produto</button>
+              <button id="btnClear" class="btn-ghost">Limpar</button>
+              <button id="btnGenSnippet" class="btn-small" title="Gerar HTML para colar">Gerar snippet</button>
+              <button id="btnCopySnippet" class="btn-small" title="Copiar último snippet">Copiar</button>
+            </div>
+
+            <div class="help" style="margin-top:8px">O snippet gerado é um bloco HTML pronto com nome, preço, imagem e link. Use se seu site for estático.</div>
+          </div>
+
+          <aside>
+            <label>Imagem (novo upload substituirá)</label>
+            <input id="prodImage" type="file" accept="image/*">
+            <div class="preview" id="imgPreview">pré-visualização</div>
+
+            <label style="margin-top:8px">ID (apenas edição)</label>
+            <input id="prodId" readonly placeholder="(novo produto)">
+
+            <div style="margin-top:8px" class="meta">
+              <div class="tag">Cloudinary</div>
+              <div class="tag">Firestore</div>
+              <div style="margin-left:auto" id="pricePreview" class="tag">R$ 0,00</div>
+            </div>
+
+            <div style="margin-top:8px">
+              <div class="help">Preview do card gerado:</div>
+              <div style="margin-top:8px" id="cardPreview" class="prod-card">
+                <div class="prod-thumb" id="cardThumb">prévia</div>
+                <div><strong id="cardName">Nome do produto</strong></div>
+                <div class="meta-row"><div class="small muted" id="cardCat">categoria</div><div style="font-weight:800" id="cardPrice">R$ 0,00</div></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="status" id="opStatus" style="display:none"></div>
+      </div>
+
+      <div class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h2>Produtos cadastrados</h2>
+          <div style="display:flex;gap:8px;align-items:center">
+            <select id="filterCategory"><option value="">Todas categorias</option><option value="novidades">Novidades</option><option value="camisetas">Camisetas</option><option value="moletons">Moletons</option></select>
+            <select id="filterPlacement"><option value="">Todos placements</option><option value="novidades">Novidades</option><option value="camisetas">Camisetas</option><option value="moletons">Moletons</option><option value="hero">Hero</option></select>
+            <input id="q" placeholder="buscar por nome" style="padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03)">
+            <button id="btnRefresh" class="btn-small">Atualizar</button>
+          </div>
+        </div>
+
+        <div id="productsList" class="products-list"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Firebase compat libs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+  <script>
+  (function(){
+    /* ====== CONFIG - substitua pelos seus dados ====== */
+    const firebaseConfig = {
+      apiKey: "AIzaSyCsHNIvR9RoNuJPHEu0m4ROjxfo_IMLl98",
+      authDomain: "meu-ecomerce-92a95.firebaseapp.com",
+      projectId: "meu-ecomerce-92a95",
+      storageBucket: "meu-ecomerce-92a95.firebasestorage.app",
+      messagingSenderId: "50343590801",
+      appId: "1:50343590801:web:fbd6da4c78db72b8533830",
+      measurementId: "G-S95ECR6L8Z"
+    };
+    const CLOUD_NAME = 'daylnmxkk';      // seu cloud name
+    const UPLOAD_PRESET = 'ecomerce';   // seu unsigned preset
+    /* ================================================= */
+
+    if (!window.firebase || !window.firebase.apps || !window.firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // UI refs
+    const adminEmail = document.getElementById('adminEmail');
+    const adminPass = document.getElementById('adminPass');
+    const btnSignIn = document.getElementById('btnSignIn');
+    const btnSignOut = document.getElementById('btnSignOut');
+    const btnCreate = document.getElementById('btnCreate');
+    const who = document.getElementById('who');
+    const btnNew = document.getElementById('btnNew');
+    const statusEl = document.getElementById('status');
+
+    const prodName = document.getElementById('prodName');
+    const prodPrice = document.getElementById('prodPrice');
+    const prodCategory = document.getElementById('prodCategory');
+    const prodPlacement = document.getElementById('prodPlacement');
+    const prodDesc = document.getElementById('prodDesc');
+    const prodImage = document.getElementById('prodImage');
+    const prodId = document.getElementById('prodId');
+    const prodFeatured = document.getElementById('prodFeatured');
+    const imgPreview = document.getElementById('imgPreview');
+    const cardThumb = document.getElementById('cardThumb');
+    const cardName = document.getElementById('cardName');
+    const cardPrice = document.getElementById('cardPrice');
+    const cardCat = document.getElementById('cardCat');
+    const pricePreview = document.getElementById('pricePreview');
+    const opStatus = document.getElementById('opStatus');
+
+    const productsListEl = document.getElementById('productsList');
+    const filterCategory = document.getElementById('filterCategory');
+    const filterPlacement = document.getElementById('filterPlacement');
+    const qInput = document.getElementById('q');
+    const btnRefresh = document.getElementById('btnRefresh');
+    const btnUpload = document.getElementById('btnUpload');
+    const btnClear = document.getElementById('btnClear');
+    const btnGenSnippet = document.getElementById('btnGenSnippet');
+    const btnCopySnippet = document.getElementById('btnCopySnippet');
+
+    const btnGenCamisetas = document.getElementById('btnGenCamisetas');
+    const btnGenMoletons = document.getElementById('btnGenMoletons');
+    const btnGenNovidades = document.getElementById('btnGenNovidades');
+    const btnGenHome = document.getElementById('btnGenHome');
+
+    let lastSnippet = '';
+
+    function setStatus(txt, isError){
+      statusEl.style.display = 'block';
+      statusEl.textContent = txt;
+      statusEl.style.color = isError ? '#ffb4b4' : '#bfece0';
+    }
+    function setOp(txt, isError){ opStatus.style.display='block'; opStatus.textContent = txt; opStatus.style.color = isError ? '#ffb4b4' : '#bfece0'; }
+    function clearStatus(){ statusEl.style.display='none'; opStatus.style.display='none'; }
+
+    function formatBRL(cents){ return (Number(cents)/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
+
+    // Auth
+    btnSignIn.addEventListener('click', function(){
+      const email = adminEmail.value.trim(); const pass = adminPass.value;
+      if (!email || !pass) { setStatus('Preencha email e senha', true); return; }
+      setStatus('Entrando...', false);
+      auth.signInWithEmailAndPassword(email, pass).then(()=> setStatus('Autenticado', false)).catch(err=> setStatus('Erro: '+err.message, true));
+    });
+    btnSignOut.addEventListener('click', ()=> auth.signOut().then(()=> setStatus('Saiu', false)));
+    btnCreate.addEventListener('click', async ()=>{
+      const email = adminEmail.value.trim(); const pass = adminPass.value;
+      if (!email || !pass) { setStatus('Preencha email e senha para criar conta', true); return; }
+      try{ setStatus('Criando usuário...', false); const res = await auth.createUserWithEmailAndPassword(email, pass); setStatus('Usuário criado', false); }catch(e){ setStatus('Erro: '+(e.message||e), true); }
+    });
+
+    // preview image
+    prodImage.addEventListener('change', function(){
+      const f = prodImage.files && prodImage.files[0];
+      if (!f) { imgPreview.innerHTML='pré-visualização'; cardThumb.innerHTML='prévia'; return; }
+      const r = new FileReader(); r.onload = e => { imgPreview.innerHTML = '<img src="'+e.target.result+'">'; cardThumb.innerHTML = '<img src="'+e.target.result+'">'; };
+      r.readAsDataURL(f);
+    });
+
+    // update small preview when inputs change
+    function refreshCardPreview(){
+      cardName.textContent = prodName.value || 'Nome do produto';
+      const price = prodPrice.value ? Number(prodPrice.value.toString().replace(',','.')) : 0;
+      pricePreview.textContent = formatBRL(Math.round((price||0)*100));
+      cardPrice.textContent = formatBRL(Math.round((price||0)*100));
+      cardCat.textContent = (prodCategory.value || 'categoria');
+    }
+    [prodName, prodPrice, prodCategory].forEach(el => el.addEventListener('input', refreshCardPreview));
+
+    // upload to cloudinary
+   async function uploadImageToCloudinary(file) {
+  if (!file) throw new Error('Arquivo não selecionado.');
+
+  const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+  const form = new FormData();
+  form.append('file', file);
+  form.append('upload_preset', UPLOAD_PRESET);
+  form.append('folder', 'magic-tshirt');
+
+  const res = await fetch(url, { method: 'POST', body: form });
+
+  const text = await res.text(); // ler texto bruto para diagnosticar
+  let data;
+  try { data = JSON.parse(text); } catch(e) { throw new Error('Resposta inesperada do Cloudinary: ' + text); }
+
+  if (!res.ok) {
+    // Mensagem mais amigável ao usuário + instrução rápida
+    const msg = (data && data.error && data.error.message) ? data.error.message : 'Erro no upload';
+    throw new Error(msg + '. Verifique o upload preset e o cloud name no painel Cloudinary. (Console: https://cloudinary.com/console/settings/upload)');
+  }
+
+  if (!data.secure_url) throw new Error('Upload ok mas sem secure_url na resposta.');
+  return data.secure_url;
+}
+
+
+    // clear form
+    function clearForm(){ prodId.value=''; prodName.value=''; prodPrice.value=''; prodDesc.value=''; prodCategory.value='novidades'; prodPlacement.value='novidades'; prodFeatured.checked=false; prodImage.value=''; imgPreview.innerHTML='pré-visualização'; cardThumb.innerHTML='prévia'; refreshCardPreview(); formTitle.textContent='Criar / Editar produto'; clearStatus(); }
+    btnClear.addEventListener('click', clearForm);
+
+    // save
+    btnUpload.addEventListener('click', async function(){
+      if (!auth.currentUser){ setStatus('Faça login primeiro', true); return; }
+      const id = prodId.value || null; const name = prodName.value.trim(); const priceRaw = prodPrice.value.trim(); const cat = prodCategory.value; const placement = prodPlacement.value; const desc = prodDesc.value || ''; const featured = !!prodFeatured.checked; const file = prodImage.files && prodImage.files[0];
+      if (!name || !priceRaw){ setStatus('Nome e preço são obrigatórios', true); return; }
+      const price = Number(priceRaw.toString().replace(',','.')); if (isNaN(price)){ setStatus('Preço inválido', true); return; }
+      try{
+        setStatus(id? 'Atualizando...':'Criando...', false);
+        let imageUrl = null; if (file) { setStatus('Subindo imagem...', false); imageUrl = await uploadImageToCloudinary(file); }
+        const docData = { name, price_cents: Math.round(price*100), category:cat, placement, description:desc, featured, updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
+        if (imageUrl) docData.image_url = imageUrl; if (!id) docData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        if (id) await db.collection('products').doc(id).update(docData); else await db.collection('products').add(docData);
+        setStatus('Produto salvo com sucesso ✅', false); clearForm();
+      }catch(e){ console.error(e); setStatus('Erro: '+(e.message||e), true); }
+    });
+
+    // list realtime and render
+    let unsub = null;
+    function startRealtimeList(){ if (unsub) unsub(); unsub = db.collection('products').orderBy('createdAt','desc').onSnapshot(snap => renderProductsSnapshot(snap), err => setStatus('Erro listando: '+err.message, true)); }
+
+    function renderProductsSnapshot(snap){ productsListEl.innerHTML=''; const q = (qInput.value||'').trim().toLowerCase(); const fCat = filterCategory.value; const fPlacement = filterPlacement.value;
+      if (snap.empty) { productsListEl.innerHTML = '<div class="help">Nenhum produto encontrado.</div>'; return; }
+      snap.forEach(doc => { const d = doc.data(); if (fCat && d.category !== fCat) return; if (fPlacement && d.placement !== fPlacement) return; if (q && !((d.name||'').toLowerCase().includes(q) || (d.description||'').toLowerCase().includes(q))) return;
+        const el = document.createElement('div'); el.className='prod-card'; el.innerHTML = `
+          <div class="prod-thumb"><img src="${escapeHtml(d.image_url||'https://via.placeholder.com/600x400?text=sem+imagem')}"></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;align-items:center"><strong>${escapeHtml(d.name||'Sem nome')}</strong>${d.featured?'<span class="featured-badge">DESTAQUE</span>':''}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><div class="small muted">${escapeHtml(d.placement||'')}</div><div style="font-weight:800">${formatBRL(d.price_cents||0)}</div></div>
+          <div class="muted" style="font-size:13px">${escapeHtml((d.description||'')).slice(0,80)}</div>
+          <div class="prod-actions"><button class="btn-ghost btn-edit" data-id="${doc.id}">Editar</button><button class="btn-ghost btn-toggle" data-id="${doc.id}">${d.featured? 'Remover destaque':'Tornar destaque'}</button><button class="btn-danger btn-delete" data-id="${doc.id}">Excluir</button></div></div>`;
+        productsListEl.appendChild(el);
+      });
+      // attach handlers
+      productsListEl.querySelectorAll('.btn-edit').forEach(b=>b.addEventListener('click',e=>loadToForm(e.currentTarget.dataset.id)));
+      productsListEl.querySelectorAll('.btn-delete').forEach(b=>b.addEventListener('click',e=>deleteProduct(e.currentTarget.dataset.id)));
+      productsListEl.querySelectorAll('.btn-toggle').forEach(b=>b.addEventListener('click',e=>toggleFeatured(e.currentTarget.dataset.id)));
+    }
+
+    async function loadToForm(id){ try{ const doc = await db.collection('products').doc(id).get(); if(!doc.exists){ setStatus('Documento não encontrado', true); return; } const d = doc.data(); prodId.value=id; prodName.value=d.name||''; prodPrice.value = ((d.price_cents||0)/100).toFixed(2).replace('.',','); prodDesc.value=d.description||''; prodCategory.value=d.category||'novidades'; prodPlacement.value=d.placement||'novidades'; prodFeatured.checked=!!d.featured; if (d.image_url) { imgPreview.innerHTML='<img src="'+d.image_url+'">'; cardThumb.innerHTML='<img src="'+d.image_url+'">'; } formTitle.textContent='Editando produto — '+id; setStatus('Carregado para edição', false); window.scrollTo({top:0,behavior:'smooth'}); }catch(e){ setStatus('Erro: '+e.message, true); }}
+
+    async function deleteProduct(id){ if(!confirm('Excluir este produto?')) return; try{ await db.collection('products').doc(id).delete(); setStatus('Produto excluído', false); }catch(e){ setStatus('Erro: '+e.message, true); }}
+    async function toggleFeatured(id){ try{ const ref = db.collection('products').doc(id); const doc = await ref.get(); if(!doc.exists){ setStatus('Documento não encontrado', true); return; } const cur = doc.data().featured||false; await ref.update({ featured: !cur, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }); setStatus('Destaque atualizado', false); }catch(e){ setStatus('Erro: '+e.message, true); }}
+
+    // filters
+    [filterCategory, filterPlacement, qInput, btnRefresh].forEach(el=>{ if(!el) return; el.addEventListener('change', ()=> db.collection('products').orderBy('createdAt','desc').get().then(snap=>renderProductsSnapshot(snap))); });
+    qInput.addEventListener('input', ()=> db.collection('products').orderBy('createdAt','desc').get().then(snap=>renderProductsSnapshot(snap)));
+
+    // export JSON
+    document.getElementById('btnCopyAll').addEventListener('click', async ()=>{
+      const snap = await db.collection('products').orderBy('createdAt','desc').get(); const arr = []; snap.forEach(d=>{ arr.push(Object.assign({id:d.id}, d.data())); }); navigator.clipboard.writeText(JSON.stringify(arr,null,2)); setStatus('JSON copiado para área de transferência', false);
+    });
+
+    // snippet generation (form)
+    function generateSnippetFromForm(){ const name = prodName.value.trim() || 'Produto'; const price = prodPrice.value ? Number(prodPrice.value.toString().replace(',','.')) : 0; const img = (imgPreview.querySelector('img') && imgPreview.querySelector('img').src) || 'https://via.placeholder.com/600x400?text=sem+imagem'; const cat = prodCategory.value || ''; const placement = prodPlacement.value || ''; const featured = prodFeatured.checked ? ' data-featured="true"' : '';
+      const html = `<article class="card product-card" data-id="${escapeHtml(prodId.value||'') }" data-name="${escapeHtml(name)}" data-price="${Math.round(price*100)}" data-category="${escapeHtml(cat)}" data-placement="${escapeHtml(placement)}"${featured}>
+  <div class="card-media"><img src="${escapeHtml(img)}" alt="${escapeHtml(name)}"></div>
+  <div class="card-body"><h3 class="card-title">${escapeHtml(name)}</h3><p class="card-sub muted">${escapeHtml(prodDesc.value||'')}</p><div class="price">${formatBRL(Math.round(price*100))}</div><div class="card-actions"><button class="btn btn-primary btn-add">Adicionar ao carrinho</button><a class="btn btn-ghost" href="#">Detalhes</a></div></div>
+</article>`;
+      lastSnippet = html; return html; }
+
+    btnGenSnippet.addEventListener('click', ()=>{ const s = generateSnippetFromForm(); setOp('Snippet gerado (copie com o botão).', false); console.log('SNIPPET:', s); });
+    btnCopySnippet.addEventListener('click', ()=>{ if (!lastSnippet){ setOp('Gere o snippet primeiro.', true); return; } navigator.clipboard.writeText(lastSnippet).then(()=> setOp('Snippet copiado ✅', false)).catch(()=> setOp('Falha ao copiar', true)); });
+
+    // ===== NOVAS FUNÇÕES: gerar HTML por categoria / página inicial (destaques) =====
+    async function generateCategoryHTML(category, title){ try{
+      setOp(`Gerando HTML para "${title}"...`, false);
+      const snap = await db.collection('products').where('category','==',category).orderBy('createdAt','desc').get();
+      if (snap.empty) { setOp('Nenhum produto nesta categoria', true); return; }
+      let html = `<!-- HTML gerado: ${title} -->\n<section class="products products-${escapeHtml(category)}">\n  <h2>${escapeHtml(title)}</h2>\n  <div class="products-grid">\n`;
+      snap.forEach(doc => { const d = doc.data(); html += `    <article class="card product-card" data-id="${escapeHtml(doc.id)}" data-name="${escapeHtml(d.name||'') }" data-price="${(d.price_cents||0)}" data-category="${escapeHtml(d.category||'') }" data-placement="${escapeHtml(d.placement||'') }"${d.featured? ' data-featured="true"':''}>\n      <div class="card-media"><img src="${escapeHtml(d.image_url||'https://via.placeholder.com/600x400?text=sem+imagem')}" alt="${escapeHtml(d.name||'')}"></div>\n      <div class="card-body">\n        <h3 class="card-title">${escapeHtml(d.name||'')}</h3>\n        <div class="price">${formatBRL(d.price_cents||0)}</div>\n        <p class="card-sub muted">${escapeHtml(d.description||'')}</p>\n        <div class="card-actions"><a class="btn btn-ghost" href="#">Ver</a></div>\n      </div>\n    </article>\n` });
+      html += '  </div>\n</section>';
+      await navigator.clipboard.writeText(html);
+      setOp('HTML gerado e copiado para a área de transferência ✅', false);
+      console.log('HTML gerado:', html);
+    }catch(e){ console.error(e); setOp('Erro gerando HTML: '+(e.message||e), true); }}
+
+    async function generateHomeHTML(){ try{
+      setOp('Gerando HTML para Página Inicial (destaques + hero)...', false);
+      // primeiro hero (placement == 'hero') Ordenado por createdAt desc
+      const heroSnap = await db.collection('products').where('placement','==','hero').orderBy('createdAt','desc').limit(1).get();
+      // depois destaques
+      const featuredSnap = await db.collection('products').where('featured','==',true).orderBy('updatedAt','desc').get();
+
+      let html = '<!-- HTML gerado: Página Inicial (Destaques) -->\n<section class="home-hero">\n';
+      if (!heroSnap.empty){ const d = heroSnap.docs[0].data(); html += `  <div class="hero" data-id="${escapeHtml(heroSnap.docs[0].id)}">\n    <img src="${escapeHtml(d.image_url||'https://via.placeholder.com/1200x600?text=sem+imagem')}" alt="${escapeHtml(d.name||'')}">\n    <div class="hero-body">\n      <h1>${escapeHtml(d.name||'')}</h1>\n      <p>${escapeHtml(d.description||'')}</p>\n      <div class="price">${formatBRL(d.price_cents||0)}</div>\n    </div>\n  </div>\n`; } else { html += '  <!-- sem hero definido -->\n'; }
+      html += '</section>\n<section class="home-highlights">\n  <h2>Destaques</h2>\n  <div class="products-grid">\n';
+      if (featuredSnap.empty){ html += '    <!-- Nenhum destaque -->\n'; }
+      featuredSnap.forEach(doc => { const d = doc.data(); html += `    <article class="card product-card" data-id="${escapeHtml(doc.id)}" data-featured="true">\n      <div class="card-media"><img src="${escapeHtml(d.image_url||'https://via.placeholder.com/600x400?text=sem+imagem')}" alt="${escapeHtml(d.name||'')}"></div>\n      <div class="card-body">\n        <h3>${escapeHtml(d.name||'')}</h3>\n        <div class="price">${formatBRL(d.price_cents||0)}</div>\n        <p class="card-sub muted">${escapeHtml(d.description||'')}</p>\n      </div>\n    </article>\n` });
+      html += '  </div>\n</section>';
+      await navigator.clipboard.writeText(html);
+      setOp('HTML da página inicial gerado e copiado ✅', false);
+      console.log('HTML home gerado:', html);
+    }catch(e){ console.error(e); setOp('Erro gerando home HTML: '+(e.message||e), true); }}
+
+    // attach category buttons
+    btnGenCamisetas.addEventListener('click', ()=> generateCategoryHTML('camisetas','Camisetas'));
+    btnGenMoletons.addEventListener('click', ()=> generateCategoryHTML('moletons','Moletons'));
+    btnGenNovidades.addEventListener('click', ()=> generateCategoryHTML('novidades','Novidades'));
+    btnGenHome.addEventListener('click', ()=> generateHomeHTML());
+
+    // snippet generator for single product (alt)
+
+    // auth state
+    auth.onAuthStateChanged(user=>{ if (user){ who.textContent = user.email||'admin'; btnSignOut.style.display='inline-block'; startRealtimeList(); setStatus('Autenticado como ' + (user.email||''), false); } else { who.textContent = 'Não autenticado'; btnSignOut.style.display='none'; if (unsub){ unsub(); unsub=null; productsListEl.innerHTML=''; } setStatus('Faça login para gerenciar', false); }});
+
+    // initial
+    clearForm();
+    console.log('Admin UI (styled) carregado - versão com geração de HTML por categoria e home');
+
+    // small helpers
+    function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  })();
+  </script>
+</body>
+</html>

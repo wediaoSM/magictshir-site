@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moletons • MagicTShirt</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-row">
+      <a href="index.html" class="logo">Magic<span>TShirt</span></a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="camisetas.html">Camisetas</a></li>
+          <li><a href="moletons.html" aria-current="page">Moletons</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="search"><input type="search" placeholder="Buscar"></div>
+        <button class="icon-btn" id="btnCart" aria-label="Abrir carrinho">🛒 <span class="cart-badge" id="cartCountMol">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-rotator" style="margin:20px 0;padding:36px 0;background:linear-gradient(90deg,#11182733,#7c5cff33);border-radius:12px;">
+    <div class="container"><h1>Moletons</h1><p class="lead">Conforto, forro macio e modelagens queridinhas.</p></div>
+  </section>
+
+  <main class="container section">
+    <div class="section-head">
+      <h2 class="section-title">Moletons</h2>
+      <div class="filters">
+        <label>Ordenar:
+          <select id="sortMoletons">
+            <option value="popular">Mais populares</option>
+            <option value="price-asc">Preço ↑</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="product-grid" id="grid-moletons">
+      <article class="card product-card" data-id="m-1" data-name="Moletom Comfort" data-price="12990">
+        <div class="card-media"><img src="https://picsum.photos/seed/moletom-comfort/800/800" alt="Moletom Comfort"></div>
+        <div class="card-body">
+          <h3 class="card-title">Moletom Comfort</h3>
+          <p class="card-sub muted">Forro macio</p>
+          <div class="price">R$ 129,90</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
+            <a class="btn btn-ghost" href="#">Detalhes</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card product-card" data-id="m-2" data-name="Moletom Oversize" data-price="13990">
+        <div class="card-media"><img src="https://picsum.photos/seed/oversize/800/800" alt="Moletom Oversize"></div>
+        <div class="card-body">
+          <h3 class="card-title">Moletom Oversize</h3>
+          <p class="card-sub muted">Fit relax</p>
+          <div class="price">R$ 139,90</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
+            <a class="btn btn-ghost" href="#">Detalhes</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card product-card" data-id="m-3" data-name="Moletom Zip" data-price="11990">
+        <div class="card-media"><img src="https://picsum.photos/seed/zip/800/800" alt="Moletom Zip"></div>
+        <div class="card-body">
+          <h3 class="card-title">Moletom Zip</h3>
+          <p class="card-sub muted">Com zíper e capuz</p>
+          <div class="price">R$ 119,90</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
+            <a class="btn btn-ghost" href="#">Detalhes</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><a class="logo footer-logo" href="index.html">Magic<span>TShirt</span></a></div>
+      <div class="footer-right"><p class="muted">© <span id="year-m"></span> MagicTShirt</p></div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>document.getElementById('year-m') && (document.getElementById('year-m').textContent = new Date().getFullYear());</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Camisetas • MagicTShirt</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-row">
+      <a href="index.html" class="logo">Magic<span>TShirt</span></a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="camisetas.html" aria-current="page">Camisetas</a></li>
+          <li><a href="moletons.html">Moletons</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="search"><input type="search" placeholder="Buscar"></div>
+        <button class="icon-btn" id="btnCart" aria-label="Abrir carrinho">🛒 <span class="cart-badge" id="cartCountCam">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-rotator" style="margin:20px 0;padding:36px 0;background:linear-gradient(90deg,#15c2c233,#7c5cff33);border-radius:12px;">
+    <div class="container"><h1>Camisetas</h1><p class="lead">Estampas exclusivas e modelagens diversas.</p></div>
+  </section>
+
+  <main class="container section">
+    <div class="section-head">
+      <h2 class="section-title">Camisetas em destaque</h2>
+      <div class="filters">
+        <label>Filtrar:
+          <select id="filterCamisetas">
+            <option value="all">Todas</option>
+            <option value="eco">Algodão orgânico</option>
+            <option value="estampa">Com estampa</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="product-grid" id="grid-camisetas">
+      <article class="card product-card" data-id="c-1" data-name="Camiseta Eco" data-price="5999">
+        <div class="card-media"><img src="https://picsum.photos/seed/camiseta-eco/800/800" alt="Camiseta Eco"></div>
+        <div class="card-body">
+          <h3 class="card-title">Camiseta Eco</h3>
+          <p class="card-sub muted">Algodão orgânico</p>
+          <div class="price">R$ 59,99</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
+            <a class="btn btn-ghost" href="#">Detalhes</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card product-card" data-id="c-2" data-name="Camiseta Retro" data-price="6999">
+        <div class="card-media"><img src="https://picsum.photos/seed/camiseta-retro/800/800" alt="Camiseta Retro"></div>
+        <div class="card-body">
+          <h3 class="card-title">Camiseta Retro</h3>
+          <p class="card-sub muted">Estampa retrô</p>
+          <div class="price">R$ 69,99</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
+            <a class="btn btn-ghost" href="#">Detalhes</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card product-card" data-id="c-3" data-name="Camiseta Band" data-price="7499">
+        <div class="card-media"><img src="https://picsum.photos/seed/camiseta-band/800/800" alt="Camiseta Band"></div>
+        <div class="card-body">
+          <h3 class="card-title">Camiseta Band</h3>
+          <p class="card-sub muted">Edição limitada</p>
+          <div class="price">R$ 74,99</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
+            <a class="btn btn-ghost" href="#">Detalhes</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><a class="logo footer-logo" href="index.html">Magic<span>TShirt</span></a></div>
+      <div class="footer-right"><p class="muted">© <span id="year-c"></span> MagicTShirt</p></div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>document.getElementById('year-c') && (document.getElementById('year-c').textContent = new Date().getFullYear());</script>
+</body>
+</html>
