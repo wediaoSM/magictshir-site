@@ -465,9 +465,14 @@
 <!-- --------------------------------------------------------------------- -->
 
 <script type="module">
-  // importa do root (frontend-products.js está no mesmo nível do index.html)
   import './frontend-products.js';
 
+  document.addEventListener('DOMContentLoaded', () => {
+    window.MagicLoadProducts?.renderHero?.('.hero-rotator',{limit:4});
+    window.MagicLoadProducts?.loadProductsInto?.('featuredGrid','camisetas',{field:'category'});
+    window.MagicLoadProducts?.loadProductsByPlacement?.('grid-novidades','novidades',{limit:24});
+    window.MagicLoadProducts?.loadProductsInto?.('grid-moletons','moletons',{field:'category'});
+  });
 </script>
 
 </body>
