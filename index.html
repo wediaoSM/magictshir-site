@@ -135,7 +135,7 @@
     </div>
   </section>
 
-  <!-- FEATURED (produtos com SVGs embutidos como imagens) -->
+  <!-- FEATURED (produtos dinâmicos serão injetados aqui) -->
   <section class="container section featured">
     <div class="section-head">
       <h2 class="section-title">Destaques</h2>
@@ -152,65 +152,30 @@
     </div>
 
     <div class="product-grid" id="featuredGrid">
-      <article class="card product-card" data-id="p-10" data-name="Camiseta Retro" data-price="6999">
-        <div class="card-media">
-          <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27800%27 viewBox=%270 0 800 800%27><defs><linearGradient id=%27pg1%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%237c5cff%27/><stop offset=%271%27 stop-color=%27%23ffd166%27/></linearGradient></defs><rect width=%27800%27 height=%27800%27 fill=%27url(%23pg1)%27/><text x=%27400%27 y=%27430%27 font-family=%27Inter,Arial%27 font-size=%2732%27 font-weight=%27800%27 fill=%27%230a0c10%27 text-anchor=%27middle%27>Camiseta Retro</text></svg>" alt="Camiseta Retro">
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Camiseta Retro</h3>
-          <p class="card-sub muted">Estampa exclusiva</p>
-          <div class="price">R$ 69,99</div>
-          <div class="card-actions">
-            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
-            <a class="btn btn-ghost" href="#">Detalhes</a>
-          </div>
-        </div>
-      </article>
+      <!-- O frontend-products.js irá injetar cards aqui -->
+      <!-- Você pode manter fallback estático se quiser -->
+    </div>
+  </section>
 
-      <article class="card product-card" data-id="p-11" data-name="Moletom Oversize" data-price="12990">
-        <div class="card-media">
-          <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27800%27 viewBox=%270 0 800 800%27><defs><linearGradient id=%27pg2%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%23151a24%27/><stop offset=%271%27 stop-color=%27%237c5cff%27/></linearGradient></defs><rect width=%27800%27 height=%27800%27 fill=%27url(%23pg2)%27/><text x=%27400%27 y=%27430%27 font-family=%27Inter,Arial%27 font-size=%2732%27 font-weight=%27800%27 fill=%27%23fff%27 text-anchor=%27middle%27>Moletom Oversize</text></svg>" alt="Moletom Oversize">
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Moletom Oversize</h3>
-          <p class="card-sub muted">Forro aconchegante</p>
-          <div class="price">R$ 129,90</div>
-          <div class="card-actions">
-            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
-            <a class="btn btn-ghost" href="#">Detalhes</a>
-          </div>
-        </div>
-      </article>
+  <!-- NOVIDADES (home) -->
+  <section class="container section" id="novidadesSection" aria-label="Novidades">
+    <div class="section-head">
+      <h2 class="section-title">Novidades</h2>
+      <p class="section-sub">Últimos lançamentos e coleções limitadas</p>
+    </div>
+    <div class="product-grid" id="grid-novidades">
+      <!-- Produtos onde placement='novidades' serão injetados aqui -->
+    </div>
+  </section>
 
-      <article class="card product-card" data-id="p-12" data-name="Camiseta Eco" data-price="5999">
-        <div class="card-media">
-          <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27800%27 viewBox=%270 0 800 800%27><defs><linearGradient id=%27pg3%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%2318a77b%27/><stop offset=%271%27 stop-color=%27%23a8e6cf%27/></linearGradient></defs><rect width=%27800%27 height=%27800%27 fill=%27url(%23pg3)%27/><text x=%27400%27 y=%27430%27 font-family=%27Inter,Arial%27 font-size=%2732%27 font-weight=%27800%27 fill=%27%230a0c10%27 text-anchor=%27middle%27>Camiseta Eco</text></svg>" alt="Camiseta Eco">
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Camiseta Eco</h3>
-          <p class="card-sub muted">Algodão orgânico</p>
-          <div class="price">R$ 59,99</div>
-          <div class="card-actions">
-            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
-            <a class="btn btn-ghost" href="#">Detalhes</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card product-card" data-id="p-13" data-name="Boné Classic" data-price="3999">
-        <div class="card-media">
-          <img src="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27800%27 viewBox=%270 0 800 800%27><defs><linearGradient id=%27pg4%27 x1=%270%27 x2=%271%27><stop offset=%270%27 stop-color=%27%231f2937%27/><stop offset=%271%27 stop-color=%27%239aa0aa%27/></linearGradient></defs><rect width=%27800%27 height=%27800%27 fill=%27url(%23pg4)%27/><text x=%27400%27 y=%27430%27 font-family=%27Inter,Arial%27 font-size=%2732%27 font-weight=%27800%27 fill=%27%23fff%27 text-anchor=%27middle%27>Boné Classic</text></svg>" alt="Boné Classic">
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Boné Classic</h3>
-          <p class="card-sub muted">Ajuste perfeito</p>
-          <div class="price">R$ 39,99</div>
-          <div class="card-actions">
-            <button class="btn btn-primary btn-add">Adicionar ao carrinho</button>
-            <a class="btn btn-ghost" href="#">Detalhes</a>
-          </div>
-        </div>
-      </article>
+  <!-- MOLETONS (opcional na home; pode ser usado na página moletons.html também) -->
+  <section class="container section" id="moletonsSection" aria-label="Moletons">
+    <div class="section-head">
+      <h2 class="section-title">Moletons</h2>
+      <p class="section-sub">Conforto e estilo para todas as estações</p>
+    </div>
+    <div class="product-grid" id="grid-moletons">
+      <!-- Produtos com category='moletons' serão injetados aqui -->
     </div>
   </section>
 
@@ -249,7 +214,7 @@
     </div>
   </section>
 
-  <!-- BLOG TEASER (SVGs como thumbnails) -->
+  <!-- BLOG TEASER -->
   <section id="blog" class="container section blog-teaser">
     <div class="section-head">
       <h2 class="section-title">Do nosso blog</h2>
@@ -439,41 +404,28 @@
   <!-- JS -->
   <script src="script.js"></script>
   <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
-  <script type="module" src="frontend-products.js"></script>
-  <!-- ---------- frontend dynamic calls (cole no final do <body>) ---------- -->
-<script type="module">
-  // ajuste o caminho se necessário: '/js/frontend-products.js' ou './js/frontend-products.js'
-  import { renderHero, loadProductsInto } from '/js/frontend-products.js';
 
-  // aguarda DOM pronto (opcional, mas seguro)
-  document.addEventListener('DOMContentLoaded', () => {
-    // 1) Hero (substitui o conteúdo da .hero-rotator pelo carrossel dinâmico)
-    // certifique-se de ter no HTML: <section class="hero-rotator"></section>
-    renderHero('.hero-rotator', { limit: 4 });
+  <!-- Import único e consistente do módulo de produtos -->
+  <script type="module">
+    // IMPORT: assume que frontend-products.js está NA MESMA PASTA que este index.html
+    import './frontend-products.js';
 
-    // 2) Seções / grids (certifique-se que os elementos existam com esses IDs)
-    // #featuredGrid - área de destaques da sua home
-    loadProductsInto('featuredGrid', 'camisetas', { field: 'category' });
+    document.addEventListener('DOMContentLoaded', () => {
+      const api = window.MagicLoadProducts;
+      if (!api) {
+        console.warn('MagicLoadProducts não encontrado — verifique se frontend-products.js está na mesma pasta e foi carregado.');
+        return;
+      }
 
-    // #grid-novidades - seção de novidades (pode usar placement ou category)
-    loadProductsInto('grid-novidades', 'novidades', { field: 'placement' });
+      // Renderiza hero (produtos com placement='hero' e featured true)
+      api.renderHero?.('.hero-rotator', { limit: 4 });
 
-    // #grid-moletons - página / seção de moletons
-    loadProductsInto('grid-moletons', 'moletons', { field: 'category' });
-  });
-</script>
-<!-- --------------------------------------------------------------------- -->
-
-<script type="module">
-  import '../frontend-products.js';
-
-  document.addEventListener('DOMContentLoaded', () => {
-    window.MagicLoadProducts?.renderHero?.('.hero-rotator',{limit:4});
-    window.MagicLoadProducts?.loadProductsInto?.('featuredGrid','camisetas',{field:'category'});
-    window.MagicLoadProducts?.loadProductsByPlacement?.('grid-novidades','novidades',{limit:24});
-    window.MagicLoadProducts?.loadProductsInto?.('grid-moletons','moletons',{field:'category'});
-  });
-</script>
+      // Carrega produtos nas seções definidas
+      api.loadProductsInto?.('featuredGrid', 'camisetas', { field: 'category' });
+      api.loadProductsByPlacement?.('grid-novidades', 'novidades', { limit: 24 });
+      api.loadProductsInto?.('grid-moletons', 'moletons', { field: 'category' });
+    });
+  </script>
 
 </body>
 </html>
